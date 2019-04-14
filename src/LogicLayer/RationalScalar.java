@@ -32,8 +32,6 @@ public class RationalScalar implements Scalar {
 	}
 	
 	
-	
-
 	@Override
 	public Scalar add(Scalar s) {
 		
@@ -92,13 +90,14 @@ public class RationalScalar implements Scalar {
 		RationalScalar newS = (RationalScalar)s;
 		return(sign==newS.sign & numer==newS.numer & denom==newS.denom);
 	}
+	
 	private void simplify() {
 		int divideBy = gcd(numer, denom);
 		numer = numer/divideBy;
 		denom = denom/divideBy;
 	}
 	
- 	private int gcd(int a, int b) {
+ 	private int gcd(int a, int b) { //shitty algorithm!! change ASAP!!
 		int gcd = 1;
 		for(int i=2 ; i<=a && i<=b ; i++) {
 			while(a%i==0 && b%i==0) {
@@ -109,5 +108,12 @@ public class RationalScalar implements Scalar {
 		}
 		return gcd;
 	}
+ 	
+ 	public String toString() {
+ 		if(denom == 1)return "" + numer ;
+ 		return numer + "/" + denom;
+ 		
+ 	}
+ 	
 
 }
