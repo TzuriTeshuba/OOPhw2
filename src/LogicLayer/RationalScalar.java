@@ -47,7 +47,6 @@ public class RationalScalar implements Scalar {
 		int newDenom = denom*newS.denom;
 		
 		RationalScalar output = new RationalScalar(newNumer, newDenom);
-		output.simplify();
 		return output;
 		
 	}
@@ -93,7 +92,7 @@ public class RationalScalar implements Scalar {
 	}
 	
 	private void simplify() {
-		int divideBy = gcd(numer, denom);
+		int divideBy = gcd(Math.abs(numer), denom);
 		numer = numer/divideBy;
 		denom = denom/divideBy;
 	}

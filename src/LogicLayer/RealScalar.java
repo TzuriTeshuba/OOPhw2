@@ -15,7 +15,7 @@ public class RealScalar implements Scalar{
 	
 	
 	public RealScalar(Double value) {
-		value = value;		
+		this.value = value;		
 
 	}
 
@@ -38,7 +38,10 @@ public class RealScalar implements Scalar{
 	@Override
 	public Scalar pow(int exponent) {
 		RealScalar output = new RealScalar(value);
-		if(exponent % 2 == 0)output =  (RealScalar)output.pow(exponent/2).mul(output.pow(exponent/2));
+		if(exponent % 2 == 0) {
+			RealScalar temp =(RealScalar) output.pow(exponent/2);
+			output =  (RealScalar)temp.mul(temp);
+		}
 		else output = (RealScalar) output.mul(output).pow(exponent-1);
 		return output;
 	}
@@ -52,6 +55,14 @@ public class RealScalar implements Scalar{
 	@Override
 	public boolean equals(Scalar s) {
 		return value.equals(((RealScalar)s).value) ;
+	}
+	public String toString() {
+		Double d = value;
+		d = (d * 1000);
+		d = (double) d.intValue();
+		d =  d / 1000;
+		if (d % 1 == 0)return  "" + d.intValue();
+		return  "" + d;
 	}
 
 	
