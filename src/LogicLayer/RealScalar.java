@@ -34,6 +34,10 @@ public class RealScalar implements Scalar{
 		RealScalar output = new RealScalar(newValue );
 		return output;
 	}
+	
+	public Scalar mul(int n) {
+		return new RealScalar(value * n);
+	}
 
 	@Override
 	public Scalar pow(int exponent) {
@@ -56,6 +60,11 @@ public class RealScalar implements Scalar{
 	public boolean equals(Scalar s) {
 		return value.equals(((RealScalar)s).value) ;
 	}
+	
+	public boolean isPostive() {
+		return value >= 0;
+	}
+	
 	public String toString() {
 		Double d = value;
 		d = (d * 1000);

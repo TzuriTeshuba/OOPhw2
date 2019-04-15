@@ -4,11 +4,11 @@ public class Polyterm {
 
 
 public Scalar getCoeff() {
-	return Coeff;
+	return coeff;
 }
 
 public void setCoeff(Scalar coeff) {
-	Coeff = coeff;
+	coeff = coeff;
 }
 
 public int getExp() {
@@ -20,45 +20,43 @@ public void setExp(int exp) {
 }
 
 	
-	private Scalar Coeff;
+	private Scalar coeff;
 	private int exp;
 	
 	public Polyterm (Scalar Coeff , int exp) {
-		Coeff = Coeff;
-		exp = exp;
+		this.coeff = Coeff;
+		this.exp = exp;
 	}
 	public boolean canAdd(Polyterm pt) {
-		//Change!!
-		return true;
+		return this.exp == pt.exp;
 	}
 	
 	public Polyterm add(Polyterm pt) {
-		//Change!!
-		return null;
+		if(!canAdd(pt))return null;
+		return new Polyterm(coeff.add(pt.coeff) , exp);
 	}
 	
 	public Polyterm mul(Polyterm pt) {
-		//Change!!
-		return null;
+		return new Polyterm (coeff.mul(pt.coeff) , exp + pt.exp);
 	}
 	
-	public Scalar evaluate(Scalar scalar) {
-		//Change!!
-		return null;
+	public Scalar evaluate(Scalar scalar) {	
+		return scalar.pow(exp).mul(coeff) ;
 	}
 	public Polyterm derivate() {
-		//Change!!
-		return null;
+		Scalar newC = coeff.mul(exp);	
+		return new Polyterm(newC , exp-1);
 	}
 	
 	public boolean equals(Polyterm pt) {
-		//Change!!
-		return true;
+		return (exp == pt.exp & coeff.equals(pt.coeff));
+	}
+	public boolean isPostive() {
+		return coeff.isPostive();
 	}
 	
 	public String  toString() {
-		//Change!!
-		return "";
+		return coeff.toString() + "X^" + exp;
 	}
 
 

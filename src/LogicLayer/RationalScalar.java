@@ -61,23 +61,38 @@ public class RationalScalar implements Scalar {
 		output.simplify();
 		return output;
 	}
+	public Scalar mul(int n) {
+		return new RationalScalar(numer * n , denom);
+	}
 
 	@Override
 	public Scalar pow(int exponent) {
-		RationalScalar output;
-		RationalScalar copy = new RationalScalar(numer, denom);
-		if(exponent == 0) {return new RationalScalar(1,1);}
-		else if(exponent == 1) {return new RationalScalar(numer, denom);}
-		else if(exponent%2==0) {
-			copy = (RationalScalar)pow(exponent/2);
-			output = (RationalScalar) copy.mul(copy);
+//		RationalScalar output;
+//		RationalScalar copy = new RationalScalar(numer, denom);
+//		if(exponent == 0) {return new RationalScalar(1,1);}
+//		else if(exponent == 1) {return new RationalScalar(numer, denom);}
+//		else if(exponent%2==0) {
+//			copy = (RationalScalar)pow(exponent/2);
+//			output = (RationalScalar) copy.mul(copy);
+//		}
+//		else {
+//			output = (RationalScalar) copy.mul(copy.mul(copy.pow(exponent-1)));
+//		}
+//		output.simplify();
+//		return output;
+		if(exponent == 0) {
+			return new RationalScalar(1,1);
+			}
+		RationalScalar output = new RationalScalar(numer , denom);
+		if(exponent == 1)return output.mul(exponent);
+		if(exponent % 2 == 0) {
+			RationalScalar temp =(RationalScalar) output.pow(exponent/2);
+			output =  (RationalScalar)temp.mul(temp);
 		}
-		else {
-			output = (RationalScalar) copy.mul(copy.mul(copy.pow(exponent-1)));
-		}
-		output.simplify();
+		else output = (RationalScalar) output.mul(output).pow(exponent-1);
 		return output;
 	}
+	
 
 	@Override
 	public Scalar neg() {
@@ -91,24 +106,22 @@ public class RationalScalar implements Scalar {
 		return(numer==newS.numer & denom==newS.denom);
 	}
 	
+	public boolean isPostive() {
+		return numer >= 0;
+	}
+	
 	private void simplify() {
 		int divideBy = gcd(Math.abs(numer), denom);
 		numer = numer/divideBy;
 		denom = denom/divideBy;
 	}
 	
- 	private int gcd(int a, int b) { //shitty algorithm!! change ASAP!!
- 		//do with primes iterator from previous work
-		int gcd = 1;
-		for(int i=2 ; i<=a && i<=b ; i++) {
-			while(a%i==0 && b%i==0) {
-				gcd=gcd*i;
-				a=a/i;
-				b=b/i;
-			}
-		}
-		return gcd;
+ 	private int gcd(int a, int b) { 
+ 		int r = a % b;
+ 		if(r == 0 )return b;
+ 		return gcd(b , r);
 	}
+ 	
  	
  	public String toString() {
  		if(denom == 1)return "" + numer ;
