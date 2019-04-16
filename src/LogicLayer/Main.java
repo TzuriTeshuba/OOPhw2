@@ -13,7 +13,11 @@ public class Main {
 		
 		
 		elad ajajal katop batahat 
+<<<<<<< HEAD
 		]]zinbayahatp]l]masf;lak;
+=======
+		]][[]][pconflict;lak;
+>>>>>>> zuri
 		
 		
 		
