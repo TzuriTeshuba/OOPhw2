@@ -61,7 +61,7 @@ public class Polyterm  implements Comparable<Polyterm>{
 
 	@Override
 	public int compareTo(Polyterm poly) {
-		return this.exp - poly.exp;
+		return 1;
 	}
 
 
