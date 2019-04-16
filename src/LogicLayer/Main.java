@@ -12,7 +12,8 @@ public class Main {
 		System.out.println(eladush.add(eladush));
 		
 		
-		
+		elad ajajal katop batahat 
+		]][[]][p]l]masf;lak;
 		
 		
 		
