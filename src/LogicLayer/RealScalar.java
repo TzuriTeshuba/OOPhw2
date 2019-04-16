@@ -18,6 +18,11 @@ public class RealScalar implements Scalar{
 		this.value = value;		
 
 	}
+	
+	public RealScalar(String s) {
+		this(Double.parseDouble(s));
+	}
+
 
 	@Override
 	public Scalar add(Scalar s) {
@@ -26,6 +31,7 @@ public class RealScalar implements Scalar{
 		RealScalar output = new RealScalar(newValue );
 		return output;
 	}
+	
 
 	@Override
 	public Scalar mul(Scalar s) {
@@ -34,6 +40,7 @@ public class RealScalar implements Scalar{
 		RealScalar output = new RealScalar(newValue );
 		return output;
 	}
+	
 	
 	public Scalar mul(int n) {
 		return new RealScalar(value * n);

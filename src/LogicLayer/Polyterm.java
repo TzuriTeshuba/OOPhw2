@@ -8,7 +8,7 @@ public class Polyterm  implements Comparable<Polyterm>{
 	}
 
 	public void setCoeff(Scalar coeff) {
-		coeff = coeff;
+		this.coeff = coeff;
 	}
 
 	public int getExp() {
@@ -27,6 +27,44 @@ public class Polyterm  implements Comparable<Polyterm>{
 		this.coeff = Coeff;
 		this.exp = exp;
 	}
+	public Polyterm (String pt , char field) {
+		String[] components =  pt.split("x^");
+			if(field == 'Q') {
+				if(components.length==1) {
+					if(pt.charAt(pt.length()-1)=='x') {
+					coeff = new RationalScalar(components[0]);
+					exp=1;
+					}
+					else {
+						exp=0;
+						coeff = new RationalScalar(pt);
+					}
+				}
+				else {
+					coeff = new RationalScalar(components[0]);
+					exp = Integer.parseInt(components[1]);
+				}
+				
+			}
+			else if(field == 'R') {
+				if(components.length==1) {
+					if(pt.charAt(pt.length()-1)=='x') {
+					coeff = new RealScalar(components[0]);
+					exp=1;
+					}
+					else {
+						exp=0;
+						coeff = new RealScalar(pt);
+					}
+				}
+				else {
+					coeff = new RealScalar(components[0]);
+					exp = Integer.parseInt(components[1]);
+				}
+				
+			}
+	}
+	
 	public boolean canAdd(Polyterm pt) {
 		return this.exp == pt.exp;
 	}

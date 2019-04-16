@@ -7,8 +7,19 @@ public class Polynomial {
 	
 	private Collection<Polyterm>  list;
 	
-	public Polynomial() {
+	public Polynomial(String poly, char field) {
 		this.list = new TreeSet<Polyterm>() ;
+		String pt = "";
+		for(int i = 0 ;i < poly.length() ; i++ ) {			
+			if(poly.charAt(i)== '+' |poly.charAt(i)== '-') {
+				list.add(new Polyterm(pt , field));
+				pt = "";
+			}
+			pt = pt + poly.charAt(i);
+
+		}		
+
+		
 	}
 	public Polynomial add(Polynomial poly) {
 		return null;

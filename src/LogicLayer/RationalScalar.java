@@ -21,6 +21,18 @@ public class RationalScalar implements Scalar {
 	private int numer;
 	private int denom;
 	
+	public RationalScalar(String s) {
+		String[] components = s.split("/");
+		if(components.length==1) {
+			numer=Integer.parseInt(s);
+			denom=1;
+		}
+		else {
+			numer = Integer.parseInt(components[0]); 
+			denom = Integer.parseInt(components[1]); 
+		}
+	}
+	
 	public RationalScalar(int numer, int denom) {
 		this.numer = numer;
 		this.denom = denom;
