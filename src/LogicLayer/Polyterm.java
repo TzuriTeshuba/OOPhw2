@@ -1,23 +1,23 @@
 package LogicLayer;
 
-public class Polyterm {
+public class Polyterm  implements Comparable<Polyterm>{
 
 
-public Scalar getCoeff() {
-	return coeff;
-}
+	public Scalar getCoeff() {
+		return coeff;
+	}
 
-public void setCoeff(Scalar coeff) {
-	coeff = coeff;
-}
+	public void setCoeff(Scalar coeff) {
+		coeff = coeff;
+	}
 
-public int getExp() {
-	return exp;
-}
+	public int getExp() {
+		return exp;
+	}
 
-public void setExp(int exp) {
-	this.exp = exp;
-}
+	public void setExp(int exp) {
+		this.exp = exp;
+	}
 
 	
 	private Scalar coeff;
@@ -57,6 +57,11 @@ public void setExp(int exp) {
 	
 	public String  toString() {
 		return coeff.toString() + "X^" + exp;
+	}
+
+	@Override
+	public int compareTo(Polyterm poly) {
+		return this.exp - poly.exp;
 	}
 
 
