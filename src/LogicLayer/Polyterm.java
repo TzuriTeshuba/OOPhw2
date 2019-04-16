@@ -59,10 +59,6 @@ public class Polyterm  implements Comparable<Polyterm>{
 		return coeff.toString() + "X^" + exp;
 	}
 
-	@Override
-	public int compareTo(Polyterm poly) {
-		return 1;
-	}
 
 
 
