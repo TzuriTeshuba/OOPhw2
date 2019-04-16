@@ -13,7 +13,7 @@ public class Main {
 		
 		
 		elad ajajal katop batahat 
-		]][[]][p]l]masf;lak;
+		]]zinbayahatp]l]masf;lak;
 		
 		
 		
