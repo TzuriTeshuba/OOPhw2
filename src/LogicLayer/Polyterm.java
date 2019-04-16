@@ -28,41 +28,25 @@ public class Polyterm  implements Comparable<Polyterm>{
 		this.exp = exp;
 	}
 	public Polyterm (String pt , char field) {
-		String[] components =  pt.split("x^");
-			if(field == 'Q') {
-				if(components.length==1) {
-					if(pt.charAt(pt.length()-1)=='x') {
-					coeff = new RationalScalar(components[0]);
-					exp=1;
-					}
-					else {
-						exp=0;
-						coeff = new RationalScalar(pt);
-					}
-				}
-				else {
-					coeff = new RationalScalar(components[0]);
-					exp = Integer.parseInt(components[1]);
-				}
-				
-			}
-			else if(field == 'R') {
-				if(components.length==1) {
-					if(pt.charAt(pt.length()-1)=='x') {
-					coeff = new RealScalar(components[0]);
-					exp=1;
-					}
-					else {
-						exp=0;
-						coeff = new RealScalar(pt);
-					}
-				}
-				else {
-					coeff = new RealScalar(components[0]);
-					exp = Integer.parseInt(components[1]);
-				}
-				
-			}
+		int i = 0;
+		String coefSTR = "";
+		while(i<pt.length() && pt.charAt(i) != 'x') {
+			coefSTR = coefSTR + pt.charAt(i);
+			i++;
+		}
+		if(coefSTR.length()==pt.length()) { exp = 0;}
+		else if(coefSTR.length() == pt.length()-1) {exp = 1;}
+		else {
+			exp = Integer.parseInt(pt.substring(i+2));
+		}
+		if(coefSTR.equals("+") | coefSTR.equals("-")) coefSTR = coefSTR + "1";
+		if(field == 'R') {
+			this.coeff = new RealScalar(coefSTR);
+		}
+		else {
+			this.coeff = new RationalScalar(coefSTR);
+		}
+		
 	}
 	
 	public boolean canAdd(Polyterm pt) {
@@ -94,6 +78,8 @@ public class Polyterm  implements Comparable<Polyterm>{
 	}
 	
 	public String  toString() {
+		if(exp == 0)return coeff.toString();
+		else if(exp == 1)return coeff.toString() + "x";
 		return coeff.toString() + "X^" + exp;
 	}
 

@@ -20,6 +20,7 @@ public class RealScalar implements Scalar{
 	}
 	
 	public RealScalar(String s) {
+	
 		this(Double.parseDouble(s));
 	}
 

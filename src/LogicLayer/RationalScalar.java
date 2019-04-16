@@ -16,8 +16,6 @@ public class RationalScalar implements Scalar {
 	public void setDenom(int denom) {
 		this.denom = denom;
 	}
-
-
 	private int numer;
 	private int denom;
 	
@@ -31,6 +29,7 @@ public class RationalScalar implements Scalar {
 			numer = Integer.parseInt(components[0]); 
 			denom = Integer.parseInt(components[1]); 
 		}
+		simplify();
 	}
 	
 	public RationalScalar(int numer, int denom) {
