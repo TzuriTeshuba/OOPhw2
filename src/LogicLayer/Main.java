@@ -10,12 +10,7 @@ public class Main {
 		Polynomial eladush = new Polynomial(s  , 'R');
 		System.out.println(eladush);
 		System.out.println(eladush.add(eladush));
-		
-		
-		elad ajajal katop batahat 
-		]]zinbayahatp]l]masf;lak;
-		
-		
+	
 		
 //		RationalScalar zuri1 = new RationalScalar(-3 , 15);
 //		RationalScalar zuri2 = new RationalScalar(4 , 43);
