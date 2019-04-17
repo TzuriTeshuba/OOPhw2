@@ -36,16 +36,16 @@ public class Polynomial {
 				Polyterm pt2 = iter2.next();
 				if(pt1.canAdd(pt2)) {
 					output.list.add(pt1.add(pt2));
-					pt1 = iter1.next();
-					pt2 = iter2.next();
+//					pt1 = iter1.next();
+//					pt2 = iter2.next();
 				}
 				else if(pt1.compareTo(pt2)<0) {
 					output.list.add(pt1);
-					pt1 = iter1.next();
+//					pt1 = iter1.next();
 				}
 				else {
 					output.list.add(pt2);
-					pt2 = iter2.next();
+//					pt2 = iter2.next();
 				}
 		
 			}
@@ -87,7 +87,7 @@ public class Polynomial {
 			toAdd = toAdd.add(p2);
 			p2 = iter.next();
 		}
-		newList.add(new Polyterm(toAdd.getCoeff(),toAdd.getExp()))
+		newList.add(new Polyterm(toAdd.getCoeff(),toAdd.getExp()));
 		
 
 		
