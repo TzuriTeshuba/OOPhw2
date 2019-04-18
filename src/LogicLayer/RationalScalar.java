@@ -22,14 +22,21 @@ public class RationalScalar implements Scalar {
 	public RationalScalar(String s) {
 		String[] components = s.split("/");
 		if(components.length==1) {
-			numer=Integer.parseInt(s);
-			denom=1;
+			if( components[0].equals("")) {
+				numer = 1;
+				denom = 1;
+			}
+			else {
+				numer=Integer.parseInt(s);
+				denom=1;
+			}
 		}
 		else {
 			numer = Integer.parseInt(components[0]); 
 			denom = Integer.parseInt(components[1]); 
+			simplify();
 		}
-		simplify();
+		
 	}
 	
 	public RationalScalar(int numer, int denom) {
@@ -135,8 +142,10 @@ public class RationalScalar implements Scalar {
  	
  	
  	public String toString() {
- 		if(denom == 1)return "" + numer ;
- 		return numer + "/" + denom;
+ 		if(denom == numer) return "";
+ 		else if(numer == denom*(-1)) return "-";
+ 		else if(denom == 1)return "" + numer ;
+ 		else return numer + "/" + denom;
  		
  	}
  	

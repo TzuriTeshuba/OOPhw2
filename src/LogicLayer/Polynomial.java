@@ -28,43 +28,42 @@ public class Polynomial {
 	public Polynomial add(Polynomial poly) {
 		Iterator<Polyterm> iter1 = list.iterator();
 		Iterator<Polyterm> iter2 = poly.list.iterator();
+		Polyterm pt1 = iter1.next();
+		Polyterm pt2 = iter2.next();
 		Polynomial output = new Polynomial();
-
-		while (iter1.hasNext()  | iter2.hasNext()) {
-			if(iter1.hasNext()==iter2.hasNext()) {
-				Polyterm pt1 = iter1.next();
-				Polyterm pt2 = iter2.next();
-				if(pt1.canAdd(pt2)) {
-					output.list.add(pt1.add(pt2));
-//					pt1 = iter1.next();
-//					pt2 = iter2.next();
-				}
-				else if(pt1.compareTo(pt2)<0) {
-					output.list.add(pt1);
-//					pt1 = iter1.next();
-				}
-				else {
-					output.list.add(pt2);
-//					pt2 = iter2.next();
-				}
 		
+		while(pt1 != null & pt2 != null) {
+			if(pt1.canAdd(pt2)) {
+				output.list.add(pt1.add(pt2));
+				if(iter1.hasNext()) pt1 = iter1.next();
+				else pt1 = null;
+				if(iter2.hasNext()) pt2 = iter2.next();
+				else pt2 = null;
 			}
-			else if(iter1.hasNext()) {
-				while(iter1.hasNext()) {
-					output.list.add(iter1.next());
-				}
+			else if(pt1.compareTo(pt2)<0) {
+				output.list.add(new Polyterm(pt1));
+				if(iter1.hasNext()) pt1 = iter1.next();
+				else pt1 = null;
 			}
 			else {
-				while(iter2.hasNext()) {
-					output.list.add(iter2.next());
-				}
-			}			
+				output.list.add(new Polyterm(pt2));
+				if(iter2.hasNext()) pt2 = iter2.next();
+				else pt2 = null;
+			}
 		}
-		
+		while(pt1 != null) {
+			output.list.add(new Polyterm(pt1));
+			if(iter1.hasNext()) pt1 = iter1.next();
+			else pt1 = null;
+		}
+		while(pt2 != null) {
+			output.list.add(new Polyterm(pt2));
+			if(iter2.hasNext()) pt2 = iter2.next();
+			else pt2 = null;
+		}
 		
 		return output;
-			
-		}
+	}
 		
 
 	public Polynomial mul(Polynomial poly) {
@@ -74,21 +73,42 @@ public class Polynomial {
 				output.list.add(pt1.mul(pt2));
 			}
 		}
-		output.simplify();
+		output = output.simplify();
 		return output;
 	}
 	
-	private void simplify() {
-		Iterator<Polyterm> iter = list.iterator();
-		Polyterm p1 = iter.next();
-		Polyterm p2 = iter.next();
-		Polyterm toAdd = p1;
-		while(p1.canAdd(p2)) {
-			toAdd = toAdd.add(p2);
-			p2 = iter.next();
-		}
-		newList.add(new Polyterm(toAdd.getCoeff(),toAdd.getExp()));
+	//switch back to brivate
+	public Polynomial simplify() {
 		
+		Polynomial output = new Polynomial();
+		Iterator<Polyterm> iter = list.iterator();
+		Polyterm sum = iter.next();
+		output.list.add(sum);
+		
+		while( iter.hasNext()) {
+		Polyterm curr = iter.next();
+		
+			if(sum.canAdd(curr)) {
+				sum = sum.add(curr);
+			}
+			else {
+				sum = curr;
+				output.list.add(sum);
+			}		
+		}
+		return output;
+		
+		
+//		Iterator<Polyterm> iter = list.iterator();
+//		Polyterm p1 = iter.next();
+//		Polyterm p2 = iter.next();
+//		Polyterm toAdd = p1;
+//		while(p1.canAdd(p2)) {
+//			toAdd = toAdd.add(p2);
+//			p2 = iter.next();
+//		}
+//		newList.add(new Polyterm(toAdd.getCoeff(),toAdd.getExp()));
+//		
 
 		
 	}
@@ -118,6 +138,8 @@ public class Polynomial {
 				}
 				if(output.charAt(0)== '+')
 					output = output.substring(1);
+				
+		if(output.charAt(0)=='+') output = output.substring(1);
 		return output;
 	}
 	public boolean equals(Polynomial poly) {

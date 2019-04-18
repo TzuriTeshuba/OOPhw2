@@ -49,6 +49,12 @@ public class Polyterm  implements Comparable<Polyterm>{
 		
 	}
 	
+	//Copy Constructor
+	public Polyterm(Polyterm toCopy) {
+		this.coeff = toCopy.coeff.mul(1);
+		this.exp = toCopy.exp;
+	}
+	
 	public boolean canAdd(Polyterm pt) {
 		return this.exp == pt.exp;
 	}
