@@ -125,7 +125,7 @@ public class RationalScalar implements Scalar {
 	}
 	
 	public boolean isPostive() {
-		return numer >= 0;
+		return numer > 0;
 	}
 	
 	private void simplify() {
@@ -139,6 +139,12 @@ public class RationalScalar implements Scalar {
  		if(r == 0 )return b;
  		return gcd(b , r);
 	}
+ 	public boolean isZero() {
+ 		return numer ==0;
+ 	}
+ 	public boolean isOne() {
+ 		return numer == denom;
+ 	}
  	
  	
  	public String toString() {

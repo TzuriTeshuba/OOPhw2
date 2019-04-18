@@ -78,7 +78,7 @@ public class Polynomial {
 	}
 	
 	//switch back to brivate
-	public Polynomial simplify() {
+	private Polynomial simplify() {
 		
 		Polynomial output = new Polynomial();
 		Iterator<Polyterm> iter = list.iterator();
@@ -139,7 +139,7 @@ public class Polynomial {
 				if(output.charAt(0)== '+')
 					output = output.substring(1);
 				
-		if(output.charAt(0)=='+') output = output.substring(1);
+		//if(output.charAt(0)=='+') output = output.substring(1);
 		return output;
 	}
 	public boolean equals(Polynomial poly) {

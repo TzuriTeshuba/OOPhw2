@@ -84,9 +84,12 @@ public class Polyterm  implements Comparable<Polyterm>{
 	}
 	
 	public String  toString() {
+		if(coeff.isZero()) return "";
+		if(exp==0 & coeff.isOne()) return "1";
+		if(exp==0 & coeff.mul(-1).isOne()) return "-1";
 		if(exp == 0)return coeff.toString();
 		else if(exp == 1)return coeff.toString() + "x";
-		return coeff.toString() + "X^" + exp;
+		return coeff.toString() + "x^" + exp;
 	}
 
 	@Override

@@ -70,7 +70,16 @@ public class RealScalar implements Scalar{
 	}
 	
 	public boolean isPostive() {
-		return value >= 0;
+		return value > 0;
+	}
+	
+	public boolean isZero() {
+		//coefficients between -0.0005 and +0.0005 turn to zero
+		//when round to the third decimal place
+		return (value<0.0005 & value>-0.0005);
+	}
+	public boolean isOne() {
+		return (value<1.0005 & value>=0.995);
 	}
 	
 	public String toString() {
