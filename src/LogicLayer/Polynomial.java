@@ -1,19 +1,19 @@
 package LogicLayer;
-import java.util.Collection;
+import java.util.Collections;
 import java.util.Iterator;
-import java.util.TreeSet;
+import java.util.LinkedList;
 
 public class Polynomial {
 	
-	private Collection<Polyterm>  list;
+	private LinkedList<Polyterm>  list;
 	
 	public Polynomial() {
-		this.list = new TreeSet<Polyterm>() ;
+		this.list = new LinkedList<Polyterm>() ;
 	}
 	
 	public Polynomial(String poly, char field) {
 	
-		this.list = new TreeSet<Polyterm>() ;
+		this.list = new LinkedList<Polyterm>() ;
 		String pt = "" + poly.charAt(0);
 		for(int i = 1 ;i < poly.length() ; i++ ) {			
 			if(poly.charAt(i)== '+' |poly.charAt(i)== '-') {
@@ -23,7 +23,8 @@ public class Polynomial {
 			pt = pt + poly.charAt(i);
 
 		}	
-		list.add(new Polyterm(pt , field));		
+		list.add(new Polyterm(pt , field));
+		Collections.sort(list);
 	}
 	public Polynomial add(Polynomial poly) {
 		Iterator<Polyterm> iter1 = list.iterator();
@@ -34,7 +35,10 @@ public class Polynomial {
 		
 		while(pt1 != null & pt2 != null) {
 			if(pt1.canAdd(pt2)) {
-				output.list.add(pt1.add(pt2));
+				Polyterm pt3 = pt1.add(pt2);
+				if (!pt3.getCoeff().toString().equals("0")) {
+				output.list.add(pt3);
+				}
 				if(iter1.hasNext()) pt1 = iter1.next();
 				else pt1 = null;
 				if(iter2.hasNext()) pt2 = iter2.next();
@@ -61,7 +65,7 @@ public class Polynomial {
 			if(iter2.hasNext()) pt2 = iter2.next();
 			else pt2 = null;
 		}
-		
+		Collections.sort(output.list);
 		return output;
 	}
 		
@@ -70,19 +74,25 @@ public class Polynomial {
 		Polynomial output = new Polynomial();
 		for(Polyterm pt1 : list) {
 			for(Polyterm pt2 : poly.list) {
-				output.list.add(pt1.mul(pt2));
+				Polyterm pt3 = pt1.mul(pt2);
+				if(!pt3.getCoeff().toString().equals("0")){
+				output.list.add(pt3);
+				}
 			}
 		}
+		if(!output.list.isEmpty()) {
+		Collections.sort(output.list);
 		output = output.simplify();
+		}
 		return output;
 	}
 	
-	//switch back to brivate
 	private Polynomial simplify() {
 		
 		Polynomial output = new Polynomial();
 		Iterator<Polyterm> iter = list.iterator();
-		Polyterm sum = iter.next();
+		Polyterm sum = null;
+		if(iter.hasNext())sum = iter.next();
 		output.list.add(sum);
 		
 		while( iter.hasNext()) {
@@ -98,19 +108,6 @@ public class Polynomial {
 		}
 		return output;
 		
-		
-//		Iterator<Polyterm> iter = list.iterator();
-//		Polyterm p1 = iter.next();
-//		Polyterm p2 = iter.next();
-//		Polyterm toAdd = p1;
-//		while(p1.canAdd(p2)) {
-//			toAdd = toAdd.add(p2);
-//			p2 = iter.next();
-//		}
-//		newList.add(new Polyterm(toAdd.getCoeff(),toAdd.getExp()));
-//		
-
-		
 	}
 	
 	public Scalar evaluate(Scalar scalar) {
@@ -124,12 +121,16 @@ public class Polynomial {
 	public Polynomial derivate() {
 		Polynomial output = new Polynomial();
 		for(Polyterm pt : list) {
-			output.list.add(pt.derivate());
+			Polyterm pt1 = pt.derivate();
+			if(!pt1.getCoeff().toString().equals("0")) {
+			output.list.add(pt1);
+			}
 		}
 		return output;
 	}
 	
 	public String toString() {
+		if (list.isEmpty())return "0";
 		String output = "";
 				for(Polyterm pt : list) {
 					if (pt.isPostive())
@@ -137,9 +138,7 @@ public class Polynomial {
 					else output = output  + pt;
 				}
 				if(output.charAt(0)== '+')
-					output = output.substring(1);
-				
-		//if(output.charAt(0)=='+') output = output.substring(1);
+					output = output.substring(1);				
 		return output;
 	}
 	public boolean equals(Polynomial poly) {

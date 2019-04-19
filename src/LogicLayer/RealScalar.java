@@ -49,7 +49,11 @@ public class RealScalar implements Scalar{
 
 	@Override
 	public Scalar pow(int exponent) {
+		if(exponent == 0) {
+			return new RealScalar(1.0);
+			}
 		RealScalar output = new RealScalar(value);
+		if(exponent == 1)return output.mul(exponent);
 		if(exponent % 2 == 0) {
 			RealScalar temp =(RealScalar) output.pow(exponent/2);
 			output =  (RealScalar)temp.mul(temp);

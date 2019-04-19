@@ -85,19 +85,6 @@ public class RationalScalar implements Scalar {
 
 	@Override
 	public Scalar pow(int exponent) {
-//		RationalScalar output;
-//		RationalScalar copy = new RationalScalar(numer, denom);
-//		if(exponent == 0) {return new RationalScalar(1,1);}
-//		else if(exponent == 1) {return new RationalScalar(numer, denom);}
-//		else if(exponent%2==0) {
-//			copy = (RationalScalar)pow(exponent/2);
-//			output = (RationalScalar) copy.mul(copy);
-//		}
-//		else {
-//			output = (RationalScalar) copy.mul(copy.mul(copy.pow(exponent-1)));
-//		}
-//		output.simplify();
-//		return output;
 		if(exponent == 0) {
 			return new RationalScalar(1,1);
 			}

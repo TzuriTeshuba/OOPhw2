@@ -1,6 +1,10 @@
-package LogicLayer;
+package InterfaceLayer;
 
 import java.util.Scanner;
+import LogicLayer.Polynomial;
+import LogicLayer.RationalScalar;
+import LogicLayer.RealScalar;
+import LogicLayer.Scalar;
 
 public class Calculator {
 	public static void main(String[] args) {
