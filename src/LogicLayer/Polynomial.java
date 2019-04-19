@@ -36,7 +36,7 @@ public class Polynomial {
 		while(pt1 != null & pt2 != null) {
 			if(pt1.canAdd(pt2)) {
 				Polyterm pt3 = pt1.add(pt2);
-				if (!pt3.getCoeff().toString().equals("0")) {
+				if (!pt3.getCoeff().isZero()) {
 				output.list.add(pt3);
 				}
 				if(iter1.hasNext()) pt1 = iter1.next();
@@ -75,7 +75,7 @@ public class Polynomial {
 		for(Polyterm pt1 : list) {
 			for(Polyterm pt2 : poly.list) {
 				Polyterm pt3 = pt1.mul(pt2);
-				if(!pt3.getCoeff().toString().equals("0")){
+				if(!pt3.getCoeff().isZero()){
 				output.list.add(pt3);
 				}
 			}
@@ -122,7 +122,7 @@ public class Polynomial {
 		Polynomial output = new Polynomial();
 		for(Polyterm pt : list) {
 			Polyterm pt1 = pt.derivate();
-			if(!pt1.getCoeff().toString().equals("0")) {
+			if(!pt1.getCoeff().isZero()) {
 			output.list.add(pt1);
 			}
 		}
