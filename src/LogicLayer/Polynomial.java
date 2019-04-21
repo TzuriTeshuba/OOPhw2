@@ -88,26 +88,26 @@ public class Polynomial {
 	}
 	
 	private Polynomial simplify() {
-		
+		if( list.isEmpty()) return this;
 		Polynomial output = new Polynomial();
 		Iterator<Polyterm> iter = list.iterator();
-		Polyterm sum = null;
-		if(iter.hasNext())sum = iter.next();
-		output.list.add(sum);
+		Polyterm temp = iter.next();
+		Polyterm curr = new Polyterm("0", temp.getCoeff().getField());
 		
-		while( iter.hasNext()) {
-		Polyterm curr = iter.next();
-		
-			if(sum.canAdd(curr)) {
-				sum = sum.add(curr);
+		while(iter.hasNext()) {
+			curr = iter.next();
+			if(temp.canAdd(curr)) {
+				temp=temp.add(curr);
 			}
 			else {
-				sum = curr;
-				output.list.add(sum);
-			}		
+				output.list.add(temp);
+				temp = curr;				
+			}
 		}
-		return output;
+		output.list.add(curr);
 		
+		return output;
+	
 	}
 	
 	public Scalar evaluate(Scalar scalar) {

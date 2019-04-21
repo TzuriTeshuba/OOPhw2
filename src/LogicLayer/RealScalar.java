@@ -85,6 +85,7 @@ public class RealScalar implements Scalar{
 	public boolean isOne() {
 		return (value<1.0005 & value>=0.995);
 	}
+	public char getField() { return 'R';   }
 	
 	public String toString() {
 		Double d = value;

@@ -132,6 +132,7 @@ public class RationalScalar implements Scalar {
  	public boolean isOne() {
  		return numer == denom;
  	}
+ 	public char getField() { return 'Q';   }
  	
  	
  	public String toString() {
