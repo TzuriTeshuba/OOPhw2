@@ -20,6 +20,7 @@ public class RationalScalar implements Scalar {
 	private int denom;
 	
 	public RationalScalar(String s) {
+		s = s.replaceAll("/~", "/-");
 		String[] components = s.split("/");
 		if(components.length==1) {
 			if( components[0].equals("")) {
@@ -34,6 +35,10 @@ public class RationalScalar implements Scalar {
 		else {
 			numer = Integer.parseInt(components[0]); 
 			denom = Integer.parseInt(components[1]); 
+			if( denom < 0) {
+				denom = denom*(-1);
+				numer = numer*(-1);
+			}
 			simplify();
 		}
 		
