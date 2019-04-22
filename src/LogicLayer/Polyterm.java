@@ -97,6 +97,4 @@ public class Polyterm  implements Comparable<Polyterm>{
 		return this.exp - poly.exp;
 	}
 
-
-
 }

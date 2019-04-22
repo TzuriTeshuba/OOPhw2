@@ -105,7 +105,7 @@ public class RationalScalar implements Scalar {
 	}
 
 	@Override
-	public boolean equals(Scalar s) {
+	public boolean equals(Object s) {
 		//because we always simplify, it is sufficient to just check the numer, denom, and sign
 		RationalScalar newS = (RationalScalar)s;
 		return(numer==newS.numer & denom==newS.denom);

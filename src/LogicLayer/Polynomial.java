@@ -142,7 +142,11 @@ public class Polynomial {
 		return output;
 	}
 	public boolean equals(Polynomial poly) {
-		return list.equals(poly.list);
+		boolean isEqual = list.size() == poly.list.size();
+		for(int i = 0 ;isEqual && i < list.size(); i++) {
+			if (!list.get(i).equals(poly.list.get(i)))isEqual = false;
+		}
+		return isEqual;
 	}
 
 }

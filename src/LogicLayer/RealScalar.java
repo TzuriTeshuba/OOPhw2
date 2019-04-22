@@ -20,8 +20,9 @@ public class RealScalar implements Scalar{
 	}
 	
 	public RealScalar(String s) {
-	
-		this(Double.parseDouble(s));
+		if(s.length() == 0)this.value = 1.0;
+		else this.value =Double.parseDouble(s);
+
 	}
 
 
@@ -69,7 +70,7 @@ public class RealScalar implements Scalar{
 	}
 
 	@Override
-	public boolean equals(Scalar s) {
+	public boolean equals(Object s) {
 		return value.equals(((RealScalar)s).value) ;
 	}
 	

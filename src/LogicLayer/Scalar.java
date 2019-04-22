@@ -10,7 +10,6 @@ public interface Scalar {
 	public boolean isPostive();
 	public boolean isZero();
 	public boolean isOne();
-	boolean equals(Scalar s);
 	public char getField();
 
 }
