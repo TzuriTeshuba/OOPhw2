@@ -89,7 +89,7 @@ public class Calculator {
 	if (fieldCH != 'Q' & fieldCH != 'R') {
 		System.out.println("invaild field , try again");
 		return askForField();
-	}
+		}
 	return fieldCH;
 	}
 
@@ -114,11 +114,12 @@ public class Calculator {
 		System.out.println("Please insert " + s + " Polynomial");
 		Scanner myScanner = new Scanner(System.in);
 		String polySTR = myScanner.nextLine();
-		if(!isVaildPoly(polySTR)) {
+		try {
+			return new Polynomial(polySTR, f);
+		}catch(Exception e) {
 			System.out.println("invaild polynomial, try again ");
 			return askForPolynomial(s,f);
 		}
-		return new Polynomial(polySTR, f);
 	}
 	
 	public static Scalar askForXValue(char f) {
@@ -126,26 +127,13 @@ public class Calculator {
 		System.out.println("please enter a scalar");
 		Scanner myScanner = new Scanner(System.in);
 		String scalarSTR = myScanner.nextLine();
-		if(!isVaildPoly(scalarSTR)) {
-			System.out.println("invaild scalar, try again");
-			return askForXValue(f);
-		}
+		try {
 		if(f == 'R') {  output = new RealScalar(scalarSTR) ;}
 		else {output = new RationalScalar(scalarSTR);}
 		return output;
-		
+		}catch(Exception e){
+			System.out.println("invaild scalar, try again");
+			return askForXValue(f);
+		}		
 	}
-	
-	public static boolean isVaildPoly(String poly) {
-		Boolean output = true;
-		String vaildOper = "/.+-x^";
-		String vaildNum  = "0123456789";
-		for(int i = 0 ;output & i < poly.length() ; i++) {
-			output = vaildOper.contains("" + poly.charAt(i))
-					|vaildNum.contains(""  +poly.charAt(i));	
-		}
-		return output;
-	}
-	
-
 }

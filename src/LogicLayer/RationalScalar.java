@@ -20,7 +20,6 @@ public class RationalScalar implements Scalar {
 	private int denom;
 	
 	public RationalScalar(String s) {
-		s = s.replaceAll("/~", "/-");
 		String[] components = s.split("/");
 		if(components.length==1) {
 			if( components[0].equals("")) {

@@ -39,7 +39,7 @@ public class Polyterm  implements Comparable<Polyterm>{
 		else {
 			exp = Integer.parseInt(pt.substring(i+2));
 		}
-		if(coefSTR.equals("+") | coefSTR.equals("-")) coefSTR = coefSTR + "1";
+		if(coefSTR.equals("+") | coefSTR.equals("-") | coefSTR.equals("")) coefSTR = coefSTR + "1";
 		if(field == 'R') {
 			this.coeff = new RealScalar(coefSTR);
 		}
