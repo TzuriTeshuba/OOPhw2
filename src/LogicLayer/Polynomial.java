@@ -11,14 +11,20 @@ public class Polynomial {
 		this.list = new LinkedList<Polyterm>() ;
 	}
 	
-	public Polynomial(String poly, char field) {
+	public Polynomial(String poly, char field) {		
 		this.list = new LinkedList<Polyterm>() ;
-		String[] polyterms = poly.split("(?=[+-])(?!(?<=/)(?=-))");
-		for(String pt : polyterms)list.add(new Polyterm(pt , field));
+		String pt = "" + poly.charAt(0);
+		for(int i = 1 ;i < poly.length() ; i++ ) {			
+			if(poly.charAt(i)== '+' |poly.charAt(i)== '-') {
+				list.add(new Polyterm(pt , field));
+				pt = "";
+			}
+			pt = pt + poly.charAt(i);
+
+		}	
+		list.add(new Polyterm(pt , field));
 		Collections.sort(list);
 	}
-	
-	
 	public Polynomial add(Polynomial poly) {
 		Iterator<Polyterm> iter1 = list.iterator();
 		Iterator<Polyterm> iter2 = poly.list.iterator();
@@ -86,7 +92,7 @@ public class Polynomial {
 		Iterator<Polyterm> iter = list.iterator();
 		Polyterm temp = iter.next();
 		Polyterm curr = new Polyterm("0", temp.getCoeff().getField());
-		
+		if(iter.hasNext()==false) output.list.add(temp);
 		while(iter.hasNext()) {
 			curr = iter.next();
 			if(temp.canAdd(curr)) {
