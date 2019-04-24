@@ -86,7 +86,7 @@ public class Polynomial {
 		Iterator<Polyterm> iter = list.iterator();
 		Polyterm temp = iter.next();
 		Polyterm curr = new Polyterm("0", temp.getCoeff().getField());
-		
+		if(iter.hasNext()==false) output.list.add(temp);
 		while(iter.hasNext()) {
 			curr = iter.next();
 			if(temp.canAdd(curr)) {
@@ -98,9 +98,7 @@ public class Polynomial {
 			}
 		}
 		output.list.add(curr);
-		
 		return output;
-	
 	}
 	
 	public Scalar evaluate(Scalar scalar) {
