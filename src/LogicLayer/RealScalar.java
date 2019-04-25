@@ -59,7 +59,7 @@ public class RealScalar implements Scalar{
 			RealScalar temp =(RealScalar) output.pow(exponent/2);
 			output =  (RealScalar)temp.mul(temp);
 		}
-		else output = (RealScalar) output.mul(output).pow(exponent-1);
+		else output = (RealScalar) output.mul(output.pow(exponent-1));
 		return output;
 	}
 

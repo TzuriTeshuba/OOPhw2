@@ -48,18 +48,7 @@ public class RationalScalar implements Scalar {
 		this.denom = denom;
 		this.simplify();
 	}
-	public RationalScalar(double input) {
-		//check this constructor
-		//left for work, not sure if complete
-		double newNumer = input;
-		this.denom = 1;
-		while(input%1 != 0) {
-			newNumer = newNumer*10;
-			denom = denom*10;
-		}
-		numer = (int)newNumer;
-		this.simplify();
-	}
+
 	
 	@Override
 	public Scalar add(Scalar s) {
@@ -98,7 +87,8 @@ public class RationalScalar implements Scalar {
 			RationalScalar temp =(RationalScalar) output.pow(exponent/2);
 			output =  (RationalScalar)temp.mul(temp);
 		}
-		else output = (RationalScalar) output.mul(output).pow(exponent-1);
+		else output = (RationalScalar) output.mul(output.pow(exponent-1));
+
 		return output;
 	}
 	
